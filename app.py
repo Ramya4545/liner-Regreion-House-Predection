@@ -1,40 +1,88 @@
 
+
 import streamlit as st
 import pandas as pd
 import joblib
 
-# Load trained model
+
+
+
 model = joblib.load("house_price_model.pkl")
 
-# Page title
-st.title("🏠 House Price Prediction")
 
-st.write("Enter the house area to predict the price.")
+=
 
-# User input
+st.title("House Price Prediction")
+
+st.write("Enter the house details to predict the price.")
+
+
+
+
 area = st.number_input(
-    "House Area (sq.ft)",
-    min_value=500,
+    "Area (Sq. Ft)",
+    min_value=300,
     max_value=5000,
-    value=1600,
-    step=100
+    value=2000,
+    step=50
 )
 
-# Prediction button
+
+
+
+floors = st.number_input(
+    "Total Floors",
+    min_value=1,
+    max_value=20,
+    value=4,
+    step=1
+)
+
+
+
+
+bedrooms = st.number_input(
+    "Bedrooms",
+    min_value=1,
+    max_value=10,
+    value=3,
+    step=1
+)
+
+
+
+
 if st.button("Predict Price"):
 
-    # Create input DataFrame
-    input_data = pd.DataFrame({
-        "Area": [area]
-    })
 
-    # Predict
-    prediction = model.predict(input_data)
-
-    # Display result
-    st.success(
-        f"Predicted House Price: {prediction[0]:.2f}"
+    input_data = pd.DataFrame(
+        [
+            [
+                area,
+                floors,
+                bedrooms
+            ]
+        ],
+        columns=[
+            "Area_Sq_Ft",
+            "Total_Floors",
+            "Bedrooms"
+        ]
     )
 
-    st.info("Price is based on the training data.")
+
+
+
+    prediction = model.predict(input_data)
+
+
+  
+
+    st.success(
+        "Predicted House Price: "
+        + str(round(prediction[0], 2))
+        + " Lakhs"
+    )
+
+
 
