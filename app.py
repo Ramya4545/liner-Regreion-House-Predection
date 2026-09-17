@@ -4,7 +4,7 @@ import joblib
 
 
 # Load trained model
-model = joblib.load("house_price_model(1).pkl")
+model = joblib.load("house_price_model.pkl")
 
 
 # Title
