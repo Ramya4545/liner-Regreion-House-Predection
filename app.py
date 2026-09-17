@@ -1,4 +1,4 @@
-```python
+
 import streamlit as st
 import pandas as pd
 import joblib
@@ -37,4 +37,4 @@ if st.button("Predict Price"):
     )
 
     st.info("Price is based on the training data.")
-```
+
