@@ -1,24 +1,19 @@
-
-
 import streamlit as st
 import pandas as pd
 import joblib
 
 
-
-
+# Load trained model
 model = joblib.load("house_price_model.pkl")
 
 
-=
-
+# Title
 st.title("House Price Prediction")
 
 st.write("Enter the house details to predict the price.")
 
 
-
-
+# Area input
 area = st.number_input(
     "Area (Sq. Ft)",
     min_value=300,
@@ -28,8 +23,7 @@ area = st.number_input(
 )
 
 
-
-
+# Total Floors input
 floors = st.number_input(
     "Total Floors",
     min_value=1,
@@ -39,8 +33,7 @@ floors = st.number_input(
 )
 
 
-
-
+# Bedrooms input
 bedrooms = st.number_input(
     "Bedrooms",
     min_value=1,
@@ -50,11 +43,10 @@ bedrooms = st.number_input(
 )
 
 
-
-
+# Predict button
 if st.button("Predict Price"):
 
-
+    # Create input data
     input_data = pd.DataFrame(
         [
             [
@@ -70,19 +62,12 @@ if st.button("Predict Price"):
         ]
     )
 
-
-
-
+    # Make prediction
     prediction = model.predict(input_data)
 
-
-  
-
+    # Display prediction
     st.success(
         "Predicted House Price: "
         + str(round(prediction[0], 2))
         + " Lakhs"
     )
-
-
-
